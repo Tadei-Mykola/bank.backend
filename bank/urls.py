@@ -1,24 +1,17 @@
-"""
-URL configuration for bank project.
 
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/5.0/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
-"""
 from django.contrib import admin
 from django.urls import path
-from .views import UserModelListCreateView
+from .views import get_all_users, get_all_banks, get_all_user_bank, add_user, get_csrf_token, delete_user, \
+    delete_user_bank, add_bank_for_user
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('users/users/', UserModelListCreateView.as_view(), name='users-list-create'),
+    path('users/users/', get_all_users, name='get-all-users'),
+    path('users/banks/<int:user_id>', get_all_user_bank, name='get_all_user_bank'),
+    path('users/newUser', add_user, name='add_user'),
+    path('users/bank', add_bank_for_user, name='add_bank_for_user'),
+    path('users/delete/<int:user_id>/', delete_user, name='delete_user'),
+    path('users/bank/delete/<int:user_id>/<int:bank_id>/', delete_user_bank, name='delete_user_bank'),
+    path('bank/banks/', get_all_banks, name='get-all-banks'),
+    path('csrf-token/', get_csrf_token, name='get_csrf_token'),
 ]
