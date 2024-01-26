@@ -20,7 +20,7 @@ class BankModel(models.Model):
         return self.bank_name
 
 class ClientModel(models.Model):
-    id_user = models.IntegerField()
+    id_user = models.IntegerField(primary_key=True)
     id_bank = models.IntegerField()
 
     def __str__(self):
